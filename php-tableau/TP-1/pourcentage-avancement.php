@@ -3,6 +3,8 @@
 $tableau = array_fill(0,100000,1) ;
 
 
+echo "debut traitement";
+echo PHP_EOL;
 
 $i=0;
 foreach ($tableau as $a) {
