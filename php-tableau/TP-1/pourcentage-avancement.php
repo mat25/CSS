@@ -15,7 +15,7 @@ foreach ($tableau as $a) {
     $i+=1;
 }
 
-//probleme avec la fin du foreach
+//probleme avec la fin du foreac
 echo $texteVert."100 %".$normal;
 echo PHP_EOL;
 echo "fin traitement";
