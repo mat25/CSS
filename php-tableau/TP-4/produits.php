@@ -30,7 +30,7 @@ echo "La valeur du stock est de ".number_format($valeurStock, 2, ',', ' ');
 */
 
 //Ex3
-
+/*
 $valeurStock = 0;
 $produitsAReaprovisioner = [];
 foreach ($produits as $reference => $cle) {
@@ -47,3 +47,38 @@ foreach ($produits as $reference => $cle) {
 echo "La valeur du stock est de ".number_format($valeurStock, 2, ',', ' ');
 
 print_r($produitsAReaprovisioner);
+*/
+
+
+// Ex4
+
+$valeurStock = 0;
+$referenceDemander = [];
+foreach ($produits as $reference => $cle) {
+    echo "$reference : $cle[Désignation]";
+    echo PHP_EOL;
+    $valeurStock += $cle["Prix"];
+
+    if($cle["Stock"] < 7) {
+        $produitsAReaprovisioner[] = $reference;
+    }
+}
+
+
+echo "La valeur du stock est de ".number_format($valeurStock, 2, ',', ' ');
+
+
+
+echo PHP_EOL;
+$referenceDemander = readline("Saisir une référence : ");
+
+if (in_array($referenceDemander,$produitsAReaprovisioner)){
+    $quantitéRecu = readline("Saisir une quantité Recu : ");
+    $produits[$referenceDemander]["Stock"] += $quantitéRecu ;
+    echo "La quantité a bien été mise a jour";
+
+} elseif (array_key_exists("P0003",$produits)) {
+    echo "La référence n'existe pas";
+} else {
+    echo "test";
+}
