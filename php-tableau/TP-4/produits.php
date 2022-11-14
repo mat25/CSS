@@ -22,7 +22,7 @@ $valeurStock = 0;
 foreach ($produits as $reference => $cle) {
     echo "$reference : $cle[Désignation]";
     echo PHP_EOL;
-    $valeurStock += $cle["Prix"];
+    $valeurStock += $cle["Prix"] * $cle["Stock"];
 }
 
 
@@ -36,7 +36,7 @@ $produitsAReaprovisioner = [];
 foreach ($produits as $reference => $cle) {
     echo "$reference : $cle[Désignation]";
     echo PHP_EOL;
-    $valeurStock += $cle["Prix"];
+    $valeurStock += $cle["Prix"] * $cle["Stock"];
 
     if($cle["Stock"] < 7) {
         $produitsAReaprovisioner[] = $reference;
@@ -57,7 +57,7 @@ $referenceDemander = [];
 foreach ($produits as $reference => $cle) {
     echo "$reference : $cle[Désignation]";
     echo PHP_EOL;
-    $valeurStock += $cle["Prix"];
+    $valeurStock += $cle["Prix"] * $cle["Stock"];
 
     if($cle["Stock"] < 7) {
         $produitsAReaprovisioner[] = $reference;
@@ -73,12 +73,12 @@ echo PHP_EOL;
 $referenceDemander = readline("Saisir une référence : ");
 
 if (in_array($referenceDemander,$produitsAReaprovisioner)){
-    $quantitéRecu = readline("Saisir une quantité Recu : ");
-    $produits[$referenceDemander]["Stock"] += $quantitéRecu ;
+    $QuantiteRecu = readline("Saisir une quantité Recu : ");
+    $produits[$referenceDemander]["Stock"] += $QuantiteRecu ;
     echo "La quantité a bien été mise a jour";
 
-} elseif (array_key_exists("P0003",$produits)) {
-    echo "La référence n'existe pas";
+} elseif (array_key_exists($referenceDemander,$produits)) {
+    echo "La référence n'est pas a réaprovissioner";
 } else {
-    echo "test";
+    echo "La référence n'existe pas";
 }
