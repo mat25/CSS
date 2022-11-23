@@ -10,6 +10,19 @@ require "../base-de-donnees/tableCategorie.php";
 */
 
 $resultats = [];
+foreach ($tableArticles as $id=> $cle) {
+
+    foreach ($tableCategories as $index => $lib){
+        if ($cle["id_categorie"] == $index) {
+            $libeller = $lib["libelle"];
+        }
+    }
+    $resultats[] = ["id" => $id, "titre" => $cle["titre"],"date_creation" => $cle["date_creation"],"libelle" => $libeller ];
+}
+
+sort($resultats);
+
+
 
 // test
 print_r($resultats);

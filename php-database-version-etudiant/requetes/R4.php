@@ -11,8 +11,13 @@ require "../base-de-donnees/tableCategorie.php";
 $resultats = [];
 
 $dateCreation = readline("Saisir une date (dd/mm/yyyy) : ");
+$dateCreation = str_replace("/","-",$dateCreation);
+
 foreach ($tableArticles as $id => $cle) {
-    if ($cle["date_creation"] > $dateCreation) {
+    $dateCrea1 = strtotime($cle["date_creation"]);
+    $dateCrea2 = strtotime($dateCreation);
+    echo $dateCrea2;
+    if ($dateCrea1 > $dateCrea2) {
         foreach ($tableAuteurs as $idAuteur => $cleAuteur) {
             if ($cle["id_auteur"] == $idAuteur) {
                 $nom = $cleAuteur["nom"];
@@ -24,7 +29,6 @@ foreach ($tableArticles as $id => $cle) {
         $resultats[] = ["id" => $id ,"titre" => $cle["titre"],"contenu" => $cle["contenu"],"date_creation" => $cle["date_creation"],"nom" => $nom,"prenom" => $prenom ];
     }
 }
-
 
 // test
 print_r($resultats);
