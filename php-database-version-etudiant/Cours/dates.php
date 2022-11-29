@@ -75,6 +75,14 @@ $dateFormate = date("d/m/Y",strtotime($date));
 
 
 
+// Quelques formats de dates en PHP
+$date = "22 May 2021";
+$dateFormate = date("d/m/Y",strtotime($date));
+
+$date = "2021/05/22";
+$date = "2021-05-22";
+
+
 
 
 
