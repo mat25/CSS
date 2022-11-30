@@ -46,17 +46,17 @@ function demanderCategorie(array $tableArticles,int $categorieId) : array {
 /* Requête R3
  * Récupérer l'ensemble des articles
  * On souhaite récupérer l'id, le titre, le contenu, la date de création et le nom de la catégorie de chaque article
+SELECT id,titre,contenu,date_creation,nom_categorie
+FROM tableArticle, tabcategorie
 */
 // PLACER ICI VOTRE FONCTION
+
+
 function ensembleDesArticle(array $tableCategories,array $tableArticles) : array {
     $resultats = [];
     foreach ($tableArticles as $id => $cle) {
-        foreach ($tableCategories as $idCategorie => $libelle) {
-            if ($idCategorie == $cle["id_categorie"]) {
-                $nomCategorie = $libelle["libelle"];
-                break;
-            }
-        }
+        $nomCategorie = $tableCategories[$cle["id_categorie"]]["libelle"];
+
         $resultats[] = ["id" => $id ,
             "titre" => $cle["titre"],
             "contenu" => $cle["contenu"],
@@ -83,11 +83,8 @@ function articlesDepuisDate(array $tableArticles,array $tableAuteurs,string $dat
         $dateCreaArticle = strtotime($cle["date_creation"]);
         $dateCreaDonne = strtotime($dateCreation);
         if ($dateCreaArticle > $dateCreaDonne) {
-            foreach ($tableAuteurs as $idAuteur => $cleAuteur) {
-                if ($cle["id_auteur"] == $idAuteur) {
-                    $nom = $cleAuteur["nom"];
-                    $prenom = $cleAuteur["prenom"];
-                }
+            $nom = $tableAuteurs[$cle["id_auteur"]]["nom"];
+            $prenom = $tableAuteurs[$cle["id_auteur"]]["prenom"];
             }
 
 
@@ -99,7 +96,6 @@ function articlesDepuisDate(array $tableArticles,array $tableAuteurs,string $dat
                 "prenom" => $prenom
             ];
         }
-    }
     return $resultats;
 
 }
@@ -118,11 +114,8 @@ function articleParOrdreAlphabetique(array $tableArticles,array $tableCategories
     $resultats = [];
     foreach ($tableArticles as $id=> $cle) {
 
-        foreach ($tableCategories as $index => $lib){
-            if ($cle["id_categorie"] == $index) {
-                $libeller = $lib["libelle"];
-            }
-        }
+        $libeller = $tableCategories[$cle["id_categorie"]]["libelle"];
+
         $resultats[] = ["id" => $id,
             "titre" => $cle["titre"],
             "date_creation" => $cle["date_creation"],
@@ -132,7 +125,7 @@ function articleParOrdreAlphabetique(array $tableArticles,array $tableCategories
     }
     // Tri du tableau par ordre alphabetique
     $columns = array_column($resultats, 'titre');
-    array_multisort($columns, SORT_ASC, $resultats);
+    array_multisort($columns, SORT_ASC,SORT_STRING | SORT_FLAG_CASE, $resultats);
 
     return $resultats;
 
@@ -144,7 +137,7 @@ function articleParOrdreAlphabetique(array $tableArticles,array $tableCategories
  * Récupérer le nombre d'articles postés par un auteur donné (id_auteur)
 */
 // PLACER ICI VOTRE FONCTION
-function nbArticleParAuteur(array $tableArticles,string $auteurId) : string {
+function nbArticleParAuteur(array $tableArticles,string $auteurId) : integer {
     $nbArticle = 0;
     foreach ($tableArticles as $id => $cle) {
         if ($cle["id_auteur"] == $auteurId) {
@@ -165,16 +158,21 @@ function nbArticleParAuteur(array $tableArticles,string $auteurId) : string {
 function nbArticlePourToutAuteur(array $tableArticles,array $tableAuteurs) : array {
     $resultats = [];
     foreach ($tableArticles as $id => $cle) {
-        foreach ($tableAuteurs as $idAuteur => $tabAuteur){
-            if ($cle["id_auteur"] == $idAuteur){
-                $nom = $tabAuteur["nom"];
-            }
+        $nom = $tableAuteurs[$cle["id_auteur"]]["nom"];
+        $prenom = $tableAuteurs[$cle["id_auteur"]]["prenom"];
 
+        $nomResultat = array_column($resultats,'nom');
+        if (in_array($nom,$nomResultat)) {
+            $resultats[$nom]["nb_article"] += 1;
+        } else {
+            $resultats [$nom] = [
+                "id" => $id,
+                "prenom" => $prenom,
+                "nom" => $nom,
+                "nb_article" => 1
+            ];
         }
     }
-
-
-
     return $resultats;
 }
 
