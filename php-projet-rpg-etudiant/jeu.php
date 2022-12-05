@@ -11,7 +11,7 @@ $grille = creerGrille($largeur,$hauteur);
 
 //Placement du hero
 $placementHero = placerHero($grille,$largeur,$hauteur);
-echo GREEN."$nomHero a été positionné en ($placementHero[0],$placementHero[1])".RESET;
+echo GREEN."$nomHero est positionné en ($placementHero[0],$placementHero[1])".RESET;
 echo PHP_EOL;
 
 // Placement des obstacles

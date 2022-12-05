@@ -49,17 +49,29 @@ function getGrille(array $grille, int $largeur) : string {
     return $resultat;
 }
 
-function placerHero(array& $grille,int $largeur, int $hauteur) : array {
-    $heroLigne = mt_rand(0,$hauteur-1);
-    $heroColonne = mt_rand(0,$largeur-1);
 
-    while ($grille[$heroLigne][$heroColonne] <> '-'){
-        $heroLigne = mt_rand(0,$hauteur-1);
-        $heroColonne = mt_rand(0,$largeur-1);
+function positionVide(array $grille,int $largeur, int $hauteur) : array {
+    $Ligne = mt_rand(0,$hauteur-1);
+    $Colonne = mt_rand(0,$largeur-1);
+
+    while ($grille[$Ligne][$Colonne] <> '-'){
+        $Ligne = mt_rand(0,$hauteur-1);
+        $Colonne = mt_rand(0,$largeur-1);
     }
-    $grille[$heroLigne][$heroColonne] = POSITION_HERO;
 
-    $placementHero = [$heroLigne,$heroColonne];
+    $resultat = [$Ligne,$Colonne];
+    return $resultat;
+}
+
+
+function placerHero(array& $grille,int $largeur, int $hauteur) : array {
+    $positionVide = positionVide($grille,$largeur,$hauteur);
+    $Ligne = $positionVide[0];
+    $Colonne = $positionVide[1];
+
+    $grille[$Ligne][$Colonne] = POSITION_HERO;
+
+    $placementHero = [$Ligne,$Colonne];
     return $placementHero;
 }
 
@@ -69,29 +81,21 @@ function placementObstacle(array& $grille,int $largeur, int $hauteur) : void {
     $nbObstaclesAPlacer = (int)$nbObstaclesAPlacer;
 
     for ($i=0;$i<$nbObstaclesAPlacer;$i++) {
-        $obstacleLigne = mt_rand(0,$hauteur-1);
-        $obstacleColonne = mt_rand(0,$largeur-1);
+        $positionVide = positionVide($grille,$largeur,$hauteur);
+        $Ligne = $positionVide[0];
+        $Colonne = $positionVide[1];
 
-        while ($grille[$obstacleLigne][$obstacleColonne] <> '-'){
-            $obstacleLigne = mt_rand(0,$hauteur-1);
-            $obstacleColonne = mt_rand(0,$largeur-1);
-        }
-
-        $grille[$obstacleLigne][$obstacleColonne] = POSITION_OBSTACLE;
+        $grille[$Ligne][$Colonne] = POSITION_OBSTACLE;
     }
 }
 
 
 function placementArriver(array& $grille,int $largeur, int $hauteur) :void {
-    $arriverLigne = mt_rand(0,$hauteur-1);
-    $arriverColonne = mt_rand(0,$largeur-1);
+    $positionVide = positionVide($grille,$largeur,$hauteur);
+    $Ligne = $positionVide[0];
+    $Colonne = $positionVide[1];
 
-    while ($grille[$arriverLigne][$arriverColonne] <> '-'){
-        $arriverLigne = mt_rand(0,$hauteur-1);
-        $arriverColonne = mt_rand(0,$largeur-1);
-    }
-
-    $grille[$arriverLigne][$arriverColonne] = POSITION_ARRIVER ;
+    $grille[$Ligne][$Colonne] = POSITION_ARRIVER ;
 
 }
 

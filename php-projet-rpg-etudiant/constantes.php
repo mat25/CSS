@@ -7,7 +7,7 @@ const GREEN = "\033[32m" ;
 const RED = "\033[31m" ;
 const RESET = "\033[0m" ;
 
-// Diffrente position
+// Differente position
 const POSITION_VIDE = '-';
 const POSITION_HERO = 'H';
 const POSITION_OBSTACLE = 'O';
