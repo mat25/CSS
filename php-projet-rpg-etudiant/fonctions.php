@@ -31,10 +31,14 @@ function getGrille(array $grille, int $largeur) : string {
     foreach ($grille  as $numero=>$ligne) {
         $uneLigne = BLUE . sprintf('%02d', $numero) . RESET;
         foreach ($ligne as $position) {
-            if ($position == '-'){
+            if ($position == POSITION_VIDE){
                 $uneLigne .= ' | ' . YELLOW.POSITION_VIDE.RESET ;
-            } else {
+            } elseif ($position == POSITION_HERO) {
                 $uneLigne .= ' | ' . GREEN.POSITION_HERO.RESET ;
+            } elseif ($position == POSITION_OBSTACLE) {
+                $uneLigne .= ' | ' . RED.POSITION_OBSTACLE.RESET ;
+            } elseif ($position == POSITION_ARRIVER) {
+                $uneLigne .= ' | ' . BLUE.POSITION_ARRIVER.RESET ;
             }
 
         }
@@ -57,6 +61,38 @@ function placerHero(array& $grille,int $largeur, int $hauteur) : array {
 
     $placementHero = [$heroLigne,$heroColonne];
     return $placementHero;
+}
+
+
+function placementObstacle(array& $grille,int $largeur, int $hauteur) : void {
+    $nbObstaclesAPlacer = $largeur * $hauteur * 0.15;
+    $nbObstaclesAPlacer = (int)$nbObstaclesAPlacer;
+
+    for ($i=0;$i<$nbObstaclesAPlacer;$i++) {
+        $obstacleLigne = mt_rand(0,$hauteur-1);
+        $obstacleColonne = mt_rand(0,$largeur-1);
+
+        while ($grille[$obstacleLigne][$obstacleColonne] <> '-'){
+            $obstacleLigne = mt_rand(0,$hauteur-1);
+            $obstacleColonne = mt_rand(0,$largeur-1);
+        }
+
+        $grille[$obstacleLigne][$obstacleColonne] = POSITION_OBSTACLE;
+    }
+}
+
+
+function placementArriver(array& $grille,int $largeur, int $hauteur) :void {
+    $arriverLigne = mt_rand(0,$hauteur-1);
+    $arriverColonne = mt_rand(0,$largeur-1);
+
+    while ($grille[$arriverLigne][$arriverColonne] <> '-'){
+        $arriverLigne = mt_rand(0,$hauteur-1);
+        $arriverColonne = mt_rand(0,$largeur-1);
+    }
+
+    $grille[$arriverLigne][$arriverColonne] = POSITION_ARRIVER ;
+
 }
 
 
