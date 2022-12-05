@@ -31,10 +31,32 @@ function getGrille(array $grille, int $largeur) : string {
     foreach ($grille  as $numero=>$ligne) {
         $uneLigne = BLUE . sprintf('%02d', $numero) . RESET;
         foreach ($ligne as $position) {
-            $uneLigne .= ' | ' . YELLOW.POSITION_VIDE.RESET ;
+            if ($position == '-'){
+                $uneLigne .= ' | ' . YELLOW.POSITION_VIDE.RESET ;
+            } else {
+                $uneLigne .= ' | ' . GREEN.POSITION_HERO.RESET ;
+            }
+
         }
         $lignes .= $uneLigne . ' | ' . PHP_EOL;}
 
+    $resultat = $numerosColonne.$lignes;
 
-    return $numerosColonne + $lignes;
+    return $resultat;
 }
+
+function placerHero(array& $grille,int $largeur, int $hauteur) : array {
+    $heroLigne = mt_rand(0,$hauteur-1);
+    $heroColonne = mt_rand(0,$largeur-1);
+
+    while ($grille[$heroLigne][$heroColonne] <> '-'){
+        $heroLigne = mt_rand(0,$hauteur-1);
+        $heroColonne = mt_rand(0,$largeur-1);
+    }
+    $grille[$heroLigne][$heroColonne] = POSITION_HERO;
+
+    $placementHero = [$heroLigne,$heroColonne];
+    return $placementHero;
+}
+
+

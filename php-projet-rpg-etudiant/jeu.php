@@ -1,11 +1,29 @@
 <?php
 
+require "fonctions.php";
 
 $largeur = readline("Saisir une largeur : ");
 $hauteur = readline("Saisir une hauteur : ");
+$nomHero = readline("Saisir le nom du hero : ");
 
+// Initialisation de la drille
 $grille = creerGrille($largeur,$hauteur);
 
+//Placement du hero
+$placementHero = placerHero($grille,$largeur,$hauteur);
+echo GREEN."$nomHero a été positionné en ($placementHero[0],$placementHero[1])".RESET;
+echo PHP_EOL;
+
+// Affichage de la grille
 echo getGrille($grille,$largeur);
+
+
+
+
+
+
+
+
+
 
 

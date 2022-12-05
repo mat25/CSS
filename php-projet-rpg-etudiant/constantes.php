@@ -9,3 +9,4 @@ const RESET = "\033[0m" ;
 
 // Position vide de la grille
 const POSITION_VIDE = '-';
+const POSITION_HERO = "H";
