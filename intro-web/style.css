@@ -1,0 +1,37 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: crimson;
+    border-top: 2px solid darkolivegreen;
+    border-bottom: 2px solid darkolivegreen;
+    text-align: center;
+}
+#bienvenue {
+    font-weight: bold;
+    font-size: 18px;
+}
+h2 {
+    color: brown;
+    border-bottom: 2px solid coral;
+    display: inline-block;
+}
+#menu {
+    list-style: none;
+    font-size: 18px;
+}
+#menu a {
+    text-decoration: none;
+    color: coral;
+}
+i {
+    color: coral;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.texte-gras {
+    font-weight: bold;
+    font-size: 20px;
+    color: blue;
+}
