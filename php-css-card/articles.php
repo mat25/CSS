@@ -30,12 +30,18 @@ $articles = [
 
 <div class="card">
     <div class="card-header">
-        <img class="card-img"  src="<?php $articles[0]['image']?>"  alt="">
+        <img class="card-img"  src="<?php echo $articles[0]['image']?>"  alt="">
     </div>
     <div class="card-body">
         <h2 class="card-title"> <?php echo $articles[0]['libelle'] ?> </h2>
-        <p class="card-price">….. </p>
-        <p class="card-text"> …… </p>
+        <p class="card-price"> <?php
+            if ($articles[0]['promo'] == true) {
+                echo $articles[0]['prix'];
+            } else {
+                echo $articles[0]['prix'];
+            }
+            ?></p>
+        <p class="card-text"> <?php echo substr($articles[0]['description'],0,100) ?> </p>
         <div class="card-btn-detail">
             <a href="#">Voir</a>
         </div>
