@@ -22,6 +22,7 @@ $articles = [
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <title>CSS Card</title>
@@ -35,13 +36,20 @@ $articles = [
     <div class="card-body">
         <h2 class="card-title"> <?php echo $articles[0]['libelle'] ?> </h2>
         <p class="card-price"> <?php
-            if ($articles[0]['promo'] == true) {
-                echo $articles[0]['prix'];
+            if ($articles[0]['promo'] ==  true) {
+                echo $articles[0]['prix']." euros ";
+                echo '<i class="fa-solid fa-tags"></i>';
             } else {
-                echo $articles[0]['prix'];
+                echo $articles[0]['prix']."euros";
             }
-            ?></p>
-        <p class="card-text"> <?php echo substr($articles[0]['description'],0,100) ?> </p>
+            ?></>
+        <p class="card-text"> <?php
+            if (strlen($articles[0]['description']) > 100) {
+                echo substr($articles[0]['description'],0,100)."..." ;
+            } else {
+                echo substr($articles[0]['description'],0,strlen($articles[0]['description'])) ;
+            }
+             ?> </p>
         <div class="card-btn-detail">
             <a href="#">Voir</a>
         </div>
