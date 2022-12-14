@@ -35,3 +35,15 @@ i {
     font-size: 20px;
     color: blue;
 }
+
+.vert {
+    background: green;
+    color: white;
+    font-weight: bold;
+
+}
+.rouge {
+    background: red;
+    color: white;
+    font-weight: bold;
+}

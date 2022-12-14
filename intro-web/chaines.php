@@ -15,6 +15,10 @@
 <body>
     <h1>Les chaines de caractères</h1>
 
+    <div>
+        <a href="index.php">Retour au sommaire</a>
+    </div>
+
     <div class="">
         <p>Bienvenue dans le cours PHP</p>
         <p><?php echo "Bienvenue dans le cours PHP"?></p>

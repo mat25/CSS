@@ -1,6 +1,6 @@
 <?php
     $nom = "Dupond";
-    $age = 17;
+    $age = 18;
     ?>
 
 
@@ -31,7 +31,41 @@
                 echo "<p>$nom est mineur !</p>";
             }
         ?>
+    </div>
 
+    <div>
+        <?php
+            if ($age >= 18) {
+                echo "<p>$nom est <span class='vert'>majeur</span> !</p>";
+            } else {
+                echo "<p>$nom est <span class='rouge'>mineur</span> !</p>";
+            }
+        ?>
+    </div>
+
+    <div>
+        <?php
+            if ($age >= 18) {
+                $style = 'vert';
+            } else {
+                $style = 'rouge';
+            }
+        ?>
+        <p><?=$nom?> est <span class='<?= $style?>'>majeur</span> !</p>
+    </div>
+
+    <h2>Utilisation d'une ternaire</h2>
+<!-- Une ternaire permet de simplifier une condition   -->
+<!-- $variable = Condition ? expression :expression; -->
+<!--        ? = Alors   et              : = sinon -->
+
+    <?php
+        $style= ($age >= 18) ? 'vert' : 'rouge';
+    ?>
+    <p><?=$nom?> est <span class='<?= $style?>'>majeur</span> !</p>
+
+    <div>
+        <p><?=$nom?> est <span class='<?= $age>=18 ? 'vert' : 'rouge';?>'>majeur</span> !</p>
     </div>
 </body>
 </html>
