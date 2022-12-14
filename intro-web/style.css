@@ -47,3 +47,41 @@ i {
     color: white;
     font-weight: bold;
 }
+
+td {
+    border: 1px solid grey;
+    padding: 10px;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid coral;
+    padding: 10px;
+    text-align: center;
+    background: coral;
+}
+
+.action {
+    text-align: left;
+    margin: 10px;
+}
+
+.premium {
+
+    padding: 5px;
+    background-color: lawngreen;
+    border: 1px solid lawngreen ;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.bouton_suppr {
+    padding: 5px;
+    background-color: coral;
+    border: 1px solid coral ;
+    border-radius: 10px;
+    color: white;
+}

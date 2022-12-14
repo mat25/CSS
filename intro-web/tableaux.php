@@ -49,7 +49,40 @@
     </ul>
 
     <h2>Affichage d'un tableau sous la forme d'une table HTML</h2>
+    <?php
+    $comptes = [
+            ['prenom'=>'Jean', 'nom'=>'Dupond', 'email'=>'jdupond@exemple.fr','prenium'=>true],
+            ['prenom'=>'Pierre', 'nom'=>'Durand', 'email'=>'pdurand@exemple.fr','prenium'=>false],
+            ['prenom'=>'Anne', 'nom'=>'Martin', 'email'=>'amartin@exemple.fr','prenium'=>true],
+            ['prenom'=>'Pauline', 'nom'=>'Sapin', 'email'=>'psapin@exemple.fr','prenium'=>false],
+    ]
+    ?>
+    <table>
+        <tr>
+            <th>Prénom</th>
+            <th>nom</th>
+            <th>email</th>
+            <th>prenium</th>
+            <th>actions</th>
+        </tr>
+    <?php
+    foreach ($comptes as $compte) { ?>
+        <tr>
+            <td><?php echo $compte['prenom'] ?></td>
+            <td><?php echo $compte['nom']?></td>
+            <td><?php echo $compte['email']?></td>
+            <td><?= $compte['prenium']?"oui":"non" ?></td>
+            <td class="action">
+                <a href="" class="bouton_suppr">supprimer</a>
+                <a href="" class="bouton_suppr">modifier</a>
+                <?php if ($compte['prenium']) {
+                        echo " <a href='' class='premium'>premium </a>";
+                     }?>
+            </td>
+        </tr>
 
+    <?php } ?>
+    </table>
 
 </body>
 </html>
